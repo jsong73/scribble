@@ -33,12 +33,9 @@ res.sendFile("notes.html", {root: "public"})
 
 //POST request to add notes
 app.post("/api/notes", (req, res) => {
-console.log ("Note has been added!")
 
 //object destructuring - requesting the title/text from the index.js = > saveNote function => fetch body => newNote obj  => title/text value
 const { title, text } = req.body
-
-console.log(req.body);
 
 // if all the properties are present, save the object
 if ( title && text ){
@@ -47,51 +44,17 @@ title,
 text,
 };
 
-const arr =[];
-
-//assigns the object newNote into an array - since .push must be an array
-arr.push(newNote);
-
-fs.writeFile("./db/notes.json", JSON.stringify(arr), (err) => {
-console.log("Note has been added to the file!")   
-});
 
 fs.readFile("./db/notes.json", "utf-8", (err, data) => {
     const parsedNotes = JSON.parse(data);
      parsedNotes.push(newNote);
-  
+
 
     fs.writeFile("./db/notes.json", JSON.stringify(parsedNotes, null, 4), (err) => {
     console.log(parsedNotes)
         });
 
-
-
-    //    parsedNotes.push(newNote);
-
-
-    // parsedNotes.push(newNote);
-    // console.log(parsedNotes)
-
-// fs.readFile(notes, "utf-8", (err, data) => {
-// const parsedNotes = JSON.parse(data)
-// parsedNotes.push(newNote);
-// });
-
-// parameters to format array spacing 
-// const stringifiedNotes = JSON.stringify(parsedNotes, null, 4);
-
-// fs.writeFile("./db/notes.json", stringifiedNotes, (err) =>{
-// console.log(err);
-// });
-
 })
-// const response = {
-// status: "success",
-// body: newNote,
-// };
-
-// console.log(response);
 
 }
 
@@ -100,3 +63,5 @@ fs.readFile("./db/notes.json", "utf-8", (err, data) => {
 //listens to PORT
 app.listen(PORT, () => 
 console.log(`App listening at http://localhost:${PORT}`));
+
+
