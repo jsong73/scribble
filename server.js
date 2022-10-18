@@ -1,7 +1,6 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
-const notes = require("./db/notes.json");
 
 //use preconfigured port ; if none go to default specified 3001 port
 const PORT = process.env.PORT || 3001;
@@ -24,43 +23,80 @@ app.get("/", (req, res) =>
 
 // GET request for notes
 app.get("/api/notes", (req, res) => {
-res.status(200).json(notes)
+res.status(200).json("./db/notes.json")
 });
 
 app.get("/notes", (req, res) => {
-
+//path.join _dirname broke code => swiched to using
 res.sendFile("notes.html", {root: "public"})
 });
 
 //POST request to add notes
 app.post("/api/notes", (req, res) => {
-console.log ("note has been added")
+console.log ("Note has been added!")
 
+//object destructuring - requesting the title/text from the index.js = > saveNote function => fetch body => newNote obj  => title/text value
 const { title, text } = req.body
-console.log(title)
-console.log(text)
+
+console.log(req.body);
+
+// if all the properties are present, save the object
+if ( title && text ){
+const newNote = {
+title,
+text,
+};
+
+const arr =[];
+
+//assigns the object newNote into an array - since .push must be an array
+arr.push(newNote);
+
+fs.writeFile("./db/notes.json", JSON.stringify(arr), (err) => {
+console.log("Note has been added to the file!")   
 });
 
-const newNote = {
+fs.readFile("./db/notes.json", "utf-8", (err, data) => {
+    const parsedNotes = JSON.parse(data);
+     parsedNotes.push(newNote);
+  
 
+    fs.writeFile("./db/notes.json", JSON.stringify(parsedNotes, null, 4), (err) => {
+    console.log(parsedNotes)
+        });
+
+
+
+    //    parsedNotes.push(newNote);
+
+
+    // parsedNotes.push(newNote);
+    // console.log(parsedNotes)
+
+// fs.readFile(notes, "utf-8", (err, data) => {
+// const parsedNotes = JSON.parse(data)
+// parsedNotes.push(newNote);
+// });
+
+// parameters to format array spacing 
+// const stringifiedNotes = JSON.stringify(parsedNotes, null, 4);
+
+// fs.writeFile("./db/notes.json", stringifiedNotes, (err) =>{
+// console.log(err);
+// });
+
+})
+// const response = {
+// status: "success",
+// body: newNote,
+// };
+
+// console.log(response);
 
 }
 
-// converts new note data to string 
-const noteString = JSON.stringify(newNote);
-
-fs.readFile(notes, "utf-8", (err, data) => {
-const parsedNotes = JSON.parse(data)
-parsedNotes.push(newNote);
-
-// parameters to format array spacing 
-const stringifiedNotes = JSON.stringify(parsedNotes, null, 4);
-
-fs.writeFile(notes, stringifiedNotes, (err) =>{
-console.log(err);
 });
 
-
 //listens to PORT
-app.listen(PORT, () =>
+app.listen(PORT, () => 
 console.log(`App listening at http://localhost:${PORT}`));
