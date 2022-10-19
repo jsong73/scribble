@@ -44,7 +44,6 @@ title,
 text,
 };
 
-
 fs.readFile("./db/notes.json", "utf-8", (err, data) => {
     const parsedNotes = JSON.parse(data);
      parsedNotes.push(newNote);
@@ -60,8 +59,11 @@ fs.readFile("./db/notes.json", "utf-8", (err, data) => {
 
 });
 
+
+
 //listens to PORT
 app.listen(PORT, () => 
 console.log(`App listening at http://localhost:${PORT}`));
 
 
+//get json file to the page - get request 
