@@ -1,6 +1,7 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
+const { readFromFile, readAndAppend } = require('./db/notes.json');
 
 //use preconfigured port ; if none go to default specified 3001 port
 const PORT = process.env.PORT || 3001;
@@ -44,26 +45,22 @@ title,
 text,
 };
 
+//reading the notes that user input and using .push to keep adding newNotes to the array
 fs.readFile("./db/notes.json", "utf-8", (err, data) => {
     const parsedNotes = JSON.parse(data);
      parsedNotes.push(newNote);
 
-
+//to write a file of the notes and format the notes in the array with correct spacing
     fs.writeFile("./db/notes.json", JSON.stringify(parsedNotes, null, 4), (err) => {
     console.log(parsedNotes)
         });
-
 })
-
 }
-
 });
 
 
-
-//listens to PORT
+     //listens to PORT
 app.listen(PORT, () => 
 console.log(`App listening at http://localhost:${PORT}`));
 
 
-//get json file to the page - get request 

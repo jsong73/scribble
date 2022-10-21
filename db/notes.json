@@ -1,46 +1,30 @@
 [
     {
-        "title": "yayaya",
-        "text": "yayaay"
-    },
-    {
-        "title": "yayaya",
-        "text": "yayaay"
+        "title": "This is my note",
+        "text": "hello"
     },
     {
         "title": "hi",
         "text": "hi"
     },
     {
-        "title": "fgsdf",
-        "text": "dfsfsdf"
-    },
-    {
-        "title": "100",
-        "text": "100"
-    },
-    {
-        "title": "fsdfsd",
-        "text": "sdfsdfsd"
-    },
-    {
-        "title": "fsdfsd",
-        "text": "sdfsdfsd"
-    },
-    {
-        "title": "this is my note",
-        "text": "hello"
-    },
-    {
-        "title": "dsfsdf",
-        "text": "sdfsdf"
+        "title": "10-20-2022",
+        "text": "-grocery\n-car wash"
     },
     {
         "title": "Hello",
-        "text": "This is another note"
+        "text": "what is this"
     },
     {
-        "title": "gdfgv",
-        "text": "dfgfdg"
+        "title": "Note",
+        "text": "body"
+    },
+    {
+        "title": "Note Taker",
+        "text": "this is where you place notes"
+    },
+    {
+        "title": "fruits",
+        "text": "apples"
     }
 ]
